@@ -13,9 +13,9 @@ class Word {
         return displayWord;
     }
 
-    isGuessedLetter(ltr) {
-        this.letterArray.forEach(Letter => {
-            Letter.checkCharacter(ltr);
+    isGuessedLetter(guess) {
+        this.letterArray.forEach(letter => {
+            letter.checkCharacter(guess);
         })
     }
 }
@@ -30,11 +30,10 @@ let m = new Letter("m");
 let display = "";
 word.letterArray.push(h, a, n, g, m, a, n);
 word.letterArray.forEach(letter => {
-    display += letter.character;
+    display += letter.character + " ";
 });
 console.log(display);
-word.isGuessedLetter("a");
+word.isGuessedLetter("h");
 word.isGuessedLetter("n");
 console.log(word.toString());
-
 module.exports = Word;

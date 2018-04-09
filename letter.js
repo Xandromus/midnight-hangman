@@ -11,13 +11,14 @@ class Letter {
             }
         }
 
-        checkCharacter(ltr) {
-            if (ltr === this.character) {
+        checkCharacter(guess) {
+            if (this.character === " ") {
                 this.isGuessed = true;
-                return true;
+            }
+            if (guess === this.character) {
+                this.isGuessed = true;
             } else {
                 this.isGuessed = false;
-                return false;
             }
         }
 }
