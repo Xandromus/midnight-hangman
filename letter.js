@@ -4,6 +4,9 @@ class Letter {
         this.isGuessed;
     }
         returnCharacter() {
+            if (this.character === " ") {
+                return " ";
+            }
             if (this.isGuessed) {
                 return this.character;
             } else {

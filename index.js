@@ -15,5 +15,24 @@ for (let i = 0; i < randomWord.length; i++) {
 }
 console.log(chosenWordLetters);
 let chosenWord = new Word(chosenWordLetters);
-
 console.log(chosenWord);
+console.log(chosenWord.toString());
+
+
+
+// function playGame() {
+//     console.log("MIDNIGHT HANGMAN");
+//     let chosenWord = new Word(chosenWordLetters);
+//     let display = "";
+//     chosenWord.letterArray.forEach(letter => {
+//              display += letter.character + " ";
+//         });
+//     console.log(display);
+//     inquirer.prompt([{
+        
+//     }]).then(function(answers) {
+
+//     })
+// }
+
+// playGame();
