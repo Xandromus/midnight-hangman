@@ -1,6 +1,7 @@
 let inquirer = require("inquirer");
 let Word = require("./word.js");
 let Letter = require("./letter.js");
+let colors = require('colors');
 
 let chosenWordLetters = [];
 let guessedLetters = [];
@@ -18,8 +19,9 @@ let chosenWord = new Word(chosenWordLetters);
 
 function playGame() {
     if (guessesCount > 0) {
-    console.log("You have " + guessesCount + " guesses remaining.");
+    console.log("\n" + "-".repeat(30) + "\nYou have " + colors.white.bold.bgRed(" " + guessesCount + " ") + " guesses remaining.\n");
     chosenWord.toString();
+    console.log("\n");
     
     inquirer.prompt([
         {
@@ -54,13 +56,17 @@ function playGame() {
             guessedLetters.push(guessedLetter);
             chosenWord.isGuessedLetter(guessedLetter);
             if (randomWord.indexOf(guessedLetter) === -1) {
+                console.log(colors.white.bold.bgRed("\n " + "-".repeat(10) + " " + "\n INCORRECT! " + "\n " + "-".repeat(10) + " "));
             guessesCount--;
+            } else {
+                console.log(colors.white.bold.bgGreen("\n " + "-".repeat(8) + " " + "\n CORRECT! " + "\n " + "-".repeat(8) + " "));
             }
         }
         
         if (chosenWord.completedWord()) {
+            console.log("\nThe word was:\n");
             chosenWord.toString();
-            console.log("You win!");
+            console.log(colors.white.bold.bgBlue("\n " + "-".repeat(8) + " " + "\n YOU WON! " + "\n " + "-".repeat(8) + " "));
             return;
         }
 
@@ -68,9 +74,10 @@ function playGame() {
 
     });
 } else {
-    console.log("You lose!");
+    console.log("\nThe word was: \n\n" + randomWord);
+    console.log(colors.white.bold.bgMagenta("\n " + "-".repeat(9) + " " + "\n YOU LOST! " + "\n " + "-".repeat(9) + " "));
 }
 }
 
-console.log("MIDNIGHT HANGMAN");
+console.log(colors.red.bold.bgWhite("\n " + "-".repeat(16) + " " + "\n M|dn|ght hangMan ".trap + "\n " + "-".repeat(16) + " "));
 playGame();
