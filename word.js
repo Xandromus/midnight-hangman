@@ -10,13 +10,24 @@ class Word {
             let currentLetter = letter.returnCharacter();
             displayWord += currentLetter + " ";
         })
-        return displayWord;
+        return console.log(displayWord);
     }
 
     isGuessedLetter(guess) {
         this.letterArray.forEach(letter => {
             letter.checkCharacter(guess);
         })
+    }
+
+    completedWord() {
+            for (let i = 0; i < this.letterArray.length; i++) {
+                console.log(this.letterArray[i].isCorrect);
+                if (!this.letterArray[i].isCorrect) {
+                    console.log("false!");
+                    return false;  
+                }
+            }
+            return true;
     }
 }
 

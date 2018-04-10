@@ -1,13 +1,13 @@
 class Letter {
     constructor(character) {
         this.character = character;
-        this.isGuessed;
+        this.isCorrect = false;
     }
         returnCharacter() {
             if (this.character === " ") {
                 return " ";
             }
-            if (this.isGuessed) {
+            if (this.isCorrect) {
                 return this.character;
             } else {
                 return "_";
@@ -15,13 +15,11 @@ class Letter {
         }
 
         checkCharacter(guess) {
-            if (this.character === " ") {
-                this.isGuessed = true;
-            }
             if (guess === this.character) {
-                this.isGuessed = true;
+                this.isCorrect = true;
+                return true;
             } else {
-                this.isGuessed = false;
+                return false;
             }
         }
 }

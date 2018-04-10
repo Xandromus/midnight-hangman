@@ -16,23 +16,60 @@ for (let i = 0; i < randomWord.length; i++) {
 console.log(chosenWordLetters);
 let chosenWord = new Word(chosenWordLetters);
 console.log(chosenWord);
-console.log(chosenWord.toString());
 
 
 
-// function playGame() {
-//     console.log("MIDNIGHT HANGMAN");
-//     let chosenWord = new Word(chosenWordLetters);
-//     let display = "";
-//     chosenWord.letterArray.forEach(letter => {
-//              display += letter.character + " ";
-//         });
-//     console.log(display);
-//     inquirer.prompt([{
+
+function playGame() {
+    if (guessesCount > 0) {
+    console.log("You have " + guessesCount + " guesses remaining.");
+    chosenWord.toString();
+    
+    inquirer.prompt([
+        {
+            name: "guess",
+            message: "Guess a letter.",
+            validate: answer => {
+                if(isNaN(parseInt(answer))){
+                    if(answer.length === 1){
+                        return true;
+                    }
+                    return "Enter one letter";
+                }
+                return "Enter a letter";
+            }       
+        }
+]).then(function(userGuess) {
+        let guessedLetter = userGuess.guess.toLowerCase();
+
+        let isGuessed = false;
+        guessedLetters.forEach(previousGuess => {
+            if (guessedLetter === previousGuess) {
+                isGuessed = true;
+            }
+        });
+
+        if (isGuessed) {
+            console.log("You already entered this letter. Please try again.");
+        } else {
+            guessedLetters.push(guessedLetter);
+            chosenWord.isGuessedLetter(guessedLetter);
+            guessesCount--;
+        }
+        console.log(chosenWord);
         
-//     }]).then(function(answers) {
+        if (chosenWord.completedWord()) {
+            console.log("You win!");
+            return;
+        }
 
-//     })
-// }
+        playGame();
 
-// playGame();
+    });
+} else {
+    console.log("You lose!");
+}
+}
+
+console.log("MIDNIGHT HANGMAN");
+playGame();
