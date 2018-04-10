@@ -13,12 +13,8 @@ let randomWord = breads[random];
 for (let i = 0; i < randomWord.length; i++) {
     chosenWordLetters.push(new Letter(randomWord.charAt(i)));
 }
-console.log(chosenWordLetters);
+
 let chosenWord = new Word(chosenWordLetters);
-console.log(chosenWord);
-
-
-
 
 function playGame() {
     if (guessesCount > 0) {
@@ -30,13 +26,16 @@ function playGame() {
             name: "guess",
             message: "Guess a letter.",
             validate: answer => {
-                if(isNaN(parseInt(answer))){
-                    if(answer.length === 1){
+                let pass = answer.match(
+                    /^[A-Za-z]+$/
+                );
+                if (pass) {
+                    if (answer.length === 1){
                         return true;
                     }
-                    return "Enter one letter";
+                    return "Please enter only one letter";
                 }
-                return "Enter a letter";
+                return "Please enter an alphabetic character.";
             }       
         }
 ]).then(function(userGuess) {
@@ -54,11 +53,13 @@ function playGame() {
         } else {
             guessedLetters.push(guessedLetter);
             chosenWord.isGuessedLetter(guessedLetter);
+            if (randomWord.indexOf(guessedLetter) === -1) {
             guessesCount--;
+            }
         }
-        console.log(chosenWord);
         
         if (chosenWord.completedWord()) {
+            chosenWord.toString();
             console.log("You win!");
             return;
         }

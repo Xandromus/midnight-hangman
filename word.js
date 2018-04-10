@@ -21,9 +21,8 @@ class Word {
 
     completedWord() {
             for (let i = 0; i < this.letterArray.length; i++) {
-                console.log(this.letterArray[i].isCorrect);
+                
                 if (!this.letterArray[i].isCorrect) {
-                    console.log("false!");
                     return false;  
                 }
             }

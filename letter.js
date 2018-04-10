@@ -5,6 +5,7 @@ class Letter {
     }
         returnCharacter() {
             if (this.character === " ") {
+                this.isCorrect = true;
                 return " ";
             }
             if (this.isCorrect) {
