@@ -81,7 +81,7 @@ function gameQuery() {
                     gameOver = true;
                     console.log("\nThe word was:\n");
                     chosenWord.toString();
-                    console.log(colors.white.bold.bgBlue("\n " + "-".repeat(8) + " " + "\n YOU WON! " + "\n " + "-".repeat(8) + " "));
+                    console.log(colors.white.bold.bgBlue("\n " + "-".repeat(8) + " " + "\n YOU WON! " + "\n " + "-".repeat(8) + " \n"));
                 }
 
                 gameQuery();
@@ -90,7 +90,8 @@ function gameQuery() {
         } else {
             gameOver = true;
             console.log("\nThe word was: \n\n" + randomWord);
-            console.log(colors.white.bold.bgMagenta("\n " + "-".repeat(9) + " " + "\n YOU LOST! " + "\n " + "-".repeat(9) + " "));
+            console.log(colors.white.bold.bgMagenta("\n " + "-".repeat(9) + " " + "\n YOU LOST! " + "\n " + "-".repeat(9) + " \n"));
+            gameQuery();
         }
     } else {
         inquirer.prompt([
