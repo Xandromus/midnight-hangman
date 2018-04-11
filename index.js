@@ -49,7 +49,7 @@ function gameQuery() {
                             if (answer.length === 1) {
                                 return true;
                             }
-                            return "Please enter only one letter";
+                            return "Please enter only one letter.";
                         }
                         return "Please enter an alphabetic character.";
                     }
@@ -104,7 +104,8 @@ function gameQuery() {
                 {
                     type: "confirm",
                     name: "again",
-                    message: "Would you like to play again?"
+                    message: "Would you like to play again?",
+                    default: true
                 }
             ]).then(function (input) {
                 let playAgain = input.again;
