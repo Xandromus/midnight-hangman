@@ -16,22 +16,18 @@ let chosenWord;
 let index;
 
 function playGame() {
-        guessesCount = 10;
-        chosenWordLetters = [];
-        guessedLetters = [];
-        gameOver = false;
-        random = Math.floor(Math.random() * breads.length);
-        randomWord = breads[random];
-        console.log(breads);
-        index = breads.indexOf(randomWord);
-        breads.splice(index, 1);
-        console.log(breads);
-        for (let i = 0; i < randomWord.length; i++) {
-            chosenWordLetters.push(new Letter(randomWord.charAt(i)));
-        }
+    guessesCount = 10;
+    chosenWordLetters = [];
+    guessedLetters = [];
+    gameOver = false;
+    random = Math.floor(Math.random() * breads.length);
+    randomWord = breads[random];
+    for (let i = 0; i < randomWord.length; i++) {
+        chosenWordLetters.push(new Letter(randomWord.charAt(i)));
+    }
 
-        chosenWord = new Word(chosenWordLetters);
-        gameQuery();
+    chosenWord = new Word(chosenWordLetters);
+    gameQuery();
 }
 
 function gameQuery() {
@@ -86,6 +82,8 @@ function gameQuery() {
                     console.log("\nThe word was:\n");
                     chosenWord.toString();
                     console.log(colors.white.bold.bgBlue("\n " + "-".repeat(8) + " " + "\n YOU WON! " + "\n " + "-".repeat(8) + " \n"));
+                    index = breads.indexOf(randomWord);
+                    breads.splice(index, 1);
                 }
 
                 gameQuery();
@@ -102,24 +100,24 @@ function gameQuery() {
             console.log("You've guessed all of the breads! Great job!");
             return;
         } else {
-        inquirer.prompt([
-            {
-                type: "confirm",
-                name: "again",
-                message: "Would you like to play again?"
-            }
-        ]).then(function (input) {
-            let playAgain = input.again;
-            if (playAgain) {
-                playGame();
-            } else {
-                return;
-            }
-        });
-    }
+            inquirer.prompt([
+                {
+                    type: "confirm",
+                    name: "again",
+                    message: "Would you like to play again?"
+                }
+            ]).then(function (input) {
+                let playAgain = input.again;
+                if (playAgain) {
+                    playGame();
+                } else {
+                    return;
+                }
+            });
+        }
     }
 }
 
-console.log(colors.red.bold.bgWhite("\n " + "-".repeat(16) + " " + "\n M|dn|ght hangMan ".trap + "\n " + "-".repeat(16) + " "));
+console.log(colors.red.bold.bgWhite("\n " + "-".repeat(16) + " " + "\n m|dn|ght hangman ".trap + "\n " + "-".repeat(16) + " "));
 console.log(colors.white.bold.bgBlue("\n " + "-".repeat(27) + " " + "\n BREADS OF THE WORLD EDITION " + "\n " + "-".repeat(27) + " "));
 playGame();
