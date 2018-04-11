@@ -13,21 +13,25 @@ let random;
 let randomWord;
 
 let chosenWord;
+let index;
 
 function playGame() {
-    guessesCount = 10;
-    chosenWordLetters = [];
-    guessedLetters = [];
-    gameOver = false;
-    random = Math.floor(Math.random() * breads.length);
-    randomWord = breads[random];
-    for (let i = 0; i < randomWord.length; i++) {
-        chosenWordLetters.push(new Letter(randomWord.charAt(i)));
-    }
+        guessesCount = 10;
+        chosenWordLetters = [];
+        guessedLetters = [];
+        gameOver = false;
+        random = Math.floor(Math.random() * breads.length);
+        randomWord = breads[random];
+        console.log(breads);
+        index = breads.indexOf(randomWord);
+        breads.splice(index, 1);
+        console.log(breads);
+        for (let i = 0; i < randomWord.length; i++) {
+            chosenWordLetters.push(new Letter(randomWord.charAt(i)));
+        }
 
-    chosenWord = new Word(chosenWordLetters);
-    gameQuery();
-
+        chosenWord = new Word(chosenWordLetters);
+        gameQuery();
 }
 
 function gameQuery() {
@@ -94,6 +98,10 @@ function gameQuery() {
             gameQuery();
         }
     } else {
+        if (!breads.length) {
+            console.log("You've guessed all of the breads! Great job!");
+            return;
+        } else {
         inquirer.prompt([
             {
                 type: "confirm",
@@ -108,6 +116,7 @@ function gameQuery() {
                 return;
             }
         });
+    }
     }
 }
 
