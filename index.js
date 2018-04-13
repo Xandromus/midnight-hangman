@@ -33,9 +33,8 @@ function playGame() {
 function gameQuery() {
     if (gameOver === false) {
         if (guessesCount > 0) {
-            console.log("\n" + "-".repeat(30) + "\nYou have " + colors.white.bold.bgRed(" " + guessesCount + " ") + " guesses remaining.\n");
+            console.log("-".repeat(32) + "\nYou have " + colors.white.bold.bgRed(" " + guessesCount + " ") + " guesses remaining.\n");
             chosenWord.toString();
-            console.log("\n");
 
             inquirer.prompt([
                 {
@@ -65,23 +64,27 @@ function gameQuery() {
                 });
 
                 if (isGuessed) {
-                    console.log("You already entered this letter. Please try again.");
+                    console.log("\033c");
+                    console.log("You already entered this letter. Please try again.\n");
                 } else {
                     guessedLetters.push(guessedLetter);
                     chosenWord.isGuessedLetter(guessedLetter);
                     if (randomWord.indexOf(guessedLetter) === -1) {
-                        console.log(colors.white.bold.bgRed("\n " + "-".repeat(10) + " " + "\n INCORRECT! " + "\n " + "-".repeat(10) + " "));
+                        console.log("\033c");
+                        console.log(colors.white.bold.bgRed(" " + "-".repeat(10) + " " + "\n INCORRECT! " + "\n " + "-".repeat(10) + " \n"));
                         guessesCount--;
                     } else {
-                        console.log(colors.white.bold.bgGreen("\n " + "-".repeat(8) + " " + "\n CORRECT! " + "\n " + "-".repeat(8) + " "));
+                        console.log("\033c");
+                        console.log(colors.white.bold.bgGreen(" " + "-".repeat(8) + " " + "\n CORRECT! " + "\n " + "-".repeat(8) + " \n"));
                     }
                 }
 
                 if (chosenWord.completedWord()) {
                     gameOver = true;
+                    console.log("\033c");
+                    console.log(colors.white.bold.bgBlue(" " + "-".repeat(8) + " " + "\n YOU WON! " + "\n " + "-".repeat(8) + " "));
                     console.log("\nThe word was:\n");
                     chosenWord.toString();
-                    console.log(colors.white.bold.bgBlue("\n " + "-".repeat(8) + " " + "\n YOU WON! " + "\n " + "-".repeat(8) + " \n"));
                     index = breads.indexOf(randomWord);
                     breads.splice(index, 1);
                 }
@@ -91,8 +94,9 @@ function gameQuery() {
             });
         } else {
             gameOver = true;
-            console.log("\nThe word was: \n\n" + randomWord);
-            console.log(colors.white.bold.bgMagenta("\n " + "-".repeat(9) + " " + "\n YOU LOST! " + "\n " + "-".repeat(9) + " \n"));
+            console.log("\033c");
+            console.log(colors.white.bold.bgMagenta(" " + "-".repeat(9) + " " + "\n YOU LOST! " + "\n " + "-".repeat(9) + " "));
+            console.log("\nThe word was: \n\n" + randomWord + "\n");
             gameQuery();
         }
     } else {
@@ -110,6 +114,7 @@ function gameQuery() {
             ]).then(function (input) {
                 let playAgain = input.again;
                 if (playAgain) {
+                    console.log("\033c");
                     playGame();
                 } else {
                     return;
@@ -119,6 +124,7 @@ function gameQuery() {
     }
 }
 
-console.log(colors.red.bold.bgWhite("\n " + "-".repeat(16) + " " + "\n m|dn|ght hangman ".trap + "\n " + "-".repeat(16) + " "));
-console.log(colors.white.bold.bgBlue("\n " + "-".repeat(27) + " " + "\n BREADS OF THE WORLD EDITION " + "\n " + "-".repeat(27) + " "));
+console.log("\033c");
+console.log(colors.red.bold.bgWhite(" " + "-".repeat(16) + " " + "\n m|dn|ght hangman ".trap + "\n " + "-".repeat(16) + " "));
+console.log(colors.white.bold.bgBlue("\n " + "-".repeat(27) + " " + "\n BREADS OF THE WORLD EDITION " + "\n " + "-".repeat(27) + " \n"));
 playGame();

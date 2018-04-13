@@ -10,7 +10,7 @@ class Word {
             let currentLetter = letter.returnCharacter();
             displayWord += currentLetter + " ";
         })
-        return console.log(displayWord);
+        return console.log(displayWord + "\n");
     }
 
     isGuessedLetter(guess) {
