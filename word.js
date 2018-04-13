@@ -1,9 +1,14 @@
+// variable to require Letter class
 let Letter = require("./letter.js");
 
+// class for each word chosen from the array
 class Word {
     constructor(letterArray) {
+        // variable to hold array of Letter classes created from chosen word
         this.letterArray = letterArray;
     }
+
+    // function to display the word to the user, updating it as letters are guessed correctly
     toString() {
         let displayWord = "";
         this.letterArray.forEach(letter => {
@@ -13,34 +18,23 @@ class Word {
         return console.log(displayWord + "\n");
     }
 
+    // function to check each guessed letter determine whether it is correct or not
     isGuessedLetter(guess) {
         this.letterArray.forEach(letter => {
             letter.checkCharacter(guess);
         })
     }
 
+    // function to determine whether word has been completed by user
     completedWord() {
-            for (let i = 0; i < this.letterArray.length; i++) {
-                
-                if (!this.letterArray[i].isCorrect) {
-                    return false;  
-                }
+        for (let i = 0; i < this.letterArray.length; i++) {
+            if (!this.letterArray[i].isCorrect) {
+                return false;
             }
-            return true;
+        }
+        return true;
     }
 }
 
-// dummy input
-// let h = new Letter("h");
-// let a = new Letter(" ");
-// let n = new Letter("n");
-// let g = new Letter("g");
-// let m = new Letter("m");
-// let word = new Word([h, a, n, g, m, a, n]);
-
-// console.log(word);
-// word.isGuessedLetter("h");
-// word.isGuessedLetter("n");
-// console.log(word.toString());
-
+// export Word class
 module.exports = Word;
